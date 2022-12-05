@@ -23,6 +23,39 @@ class AppointmentShortSerializer(serializers.ModelSerializer):
         fields = ["date", "timeslot"]
 
 class DoctorAppointSerializer(serializers.ModelSerializer):
+    timeslots = AppointmentSerializer(many=True)
+    # name = serializers.SerializerMethodField()
+
+    # def get_name(self, appointment):
+    #     return appointment.doctor.name
+
+    # surname = serializers.SerializerMethodField()
+
+    # def get_surname(self, appointment):
+    #     return appointment.doctor.surname
+   
+    # speciality = serializers.SerializerMethodField()
+
+    # def get_speciality(self, appointment):
+    #     return appointment.doctor.speciality
+    
     class Meta:
+        
+        fields = ["name", "surname", "speciality", "timeslots"]
         model = Doctor
-        fields = ["name", "surname", "speciality"]
+
+    # def create(self, validated_data):
+    #     data = validated_data.pop("timeslots")
+    #     doctor = Doctor.objects.create(**validated_data)
+    #     for d in data:
+    #         Appointment.objects.create(doctor_id=doctor.id, date=d['date'], timeslot=d['timeslot'], 
+    #         patient_name = d['patient_name'], patient_surname = d['patient_surname'], patient_email = d['patient_email'])
+    #     return doctor
+
+    #  def update(self, instance, validated_data):
+    #     doctor = Doctor.objects.create(**validated_data)
+    #     instance.email = validated_data.get('email', instance.email)
+    #     instance.content = validated_data.get('content', instance.content)
+    #     instance.created = validated_data.get('created', instance.created)
+    #     instance.save()
+    #     return instance  

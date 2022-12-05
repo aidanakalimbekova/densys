@@ -96,12 +96,11 @@ class Appointment(models.Model):
         (8, '17:00 - 17:30'),
     )
 
-    doctor = models.ForeignKey(Doctor, on_delete = models.CASCADE)
+    doctor = models.ForeignKey(Doctor, on_delete = models.CASCADE, related_name='timeslots')
     date = models.DateField(help_text="DD-MM-YYYY")
     timeslot = models.IntegerField(choices=TIMESLOT_LIST)
     patient_name = models.CharField(max_length=60, default = "aidand")
     patient_surname = models.CharField(max_length=60, default = "kalimbekova")
-    is_booked = models.BooleanField(default=False)
     patient_email = models.EmailField(("Email"), blank=True, null=True)
 
     def __str__(self):
